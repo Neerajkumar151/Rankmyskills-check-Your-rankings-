@@ -38,8 +38,12 @@ export const Footer = ({ onNavigate }: { onNavigate: (page: Page) => void }) => 
                 <div className="grid max-w-7xl grid-cols-6 gap-8 p-8 md:p-12 lg:p-16">
                     <div className="col-span-6 flex flex-col gap-6 md:col-span-3">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                                <span className="text-white font-bold text-base tracking-tight">R</span>
+                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 overflow-hidden">
+                                <img
+                                    src="/logo.jpeg"
+                                    alt="RankMySkills Logo"
+                                    className="w-full h-full object-cover mix-blend-screen"
+                                />
                             </div>
                             <span className="text-foreground font-semibold text-base tracking-tight">RankMySkills</span>
                         </div>

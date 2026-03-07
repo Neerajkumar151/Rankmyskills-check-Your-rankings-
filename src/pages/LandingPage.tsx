@@ -22,8 +22,12 @@ export const LandingPage = memo(({ onNavigate }: { onNavigate: (page: Page) => v
             <nav className="fixed top-0 left-0 right-0 z-50 glass">
                 <div className="mx-auto px-6 sm:px-10 lg:px-16 py-4 flex items-center justify-between">
                     <div className="flex items-center gap-3 group cursor-pointer hover:opacity-80 transition-opacity" onClick={() => onNavigate('landing')}>
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-shadow duration-300">
-                            <span className="text-white font-bold text-lg tracking-tight">R</span>
+                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-shadow duration-300 overflow-hidden">
+                            <img
+                                src="/logo.jpeg"
+                                alt="RankMySkills"
+                                className="w-full h-full object-cover mix-blend-screen"
+                            />
                         </div>
                         <span className="text-foreground font-semibold text-lg tracking-tight">RankMySkills</span>
                     </div>

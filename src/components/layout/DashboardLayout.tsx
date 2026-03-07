@@ -40,8 +40,8 @@ export const DashboardLayout = memo(({ children, currentPage, onNavigate }: { ch
     <>
       <div className="p-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-            <span className="text-white font-bold text-xl">R</span>
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center overflow-hidden shadow-lg shadow-indigo-500/20">
+            <img src="/logo.jpeg" alt="RankMySkills" className="w-full h-full object-cover mix-blend-screen" />
           </div>
           <span className="text-foreground font-semibold text-lg">RankMySkills</span>
         </div>

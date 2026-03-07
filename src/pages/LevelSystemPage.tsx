@@ -33,8 +33,12 @@ export const LevelSystemPage = ({ onNavigate }: { onNavigate: (page: Page) => vo
                         <span>Back</span>
                     </button>
                     <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('landing')}>
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-md">
-                            <span className="text-white font-bold text-xs tracking-tight">R</span>
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-md overflow-hidden">
+                            <img
+                                src="/logo.jpeg"
+                                alt="RankMySkills"
+                                className="w-full h-full object-cover mix-blend-screen"
+                            />
                         </div>
                         <span className="text-foreground font-semibold tracking-tight text-sm">RankMySkills</span>
                     </div>
