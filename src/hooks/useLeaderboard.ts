@@ -18,6 +18,7 @@ export interface LeaderboardEntry {
   gfg: number | string;
   level: string;
   rank: number;
+  createdAt: number;
 }
 
 export function useLeaderboard(type: 'global' | 'college') {
@@ -96,6 +97,7 @@ export function useLeaderboard(type: 'global' | 'college') {
           gfg: gfg || 0,
           level: getLevel(globalScore),
           rank: 0,
+          createdAt: new Date(u.created_at || 0).getTime(),
         };
       });
 
@@ -105,26 +107,29 @@ export function useLeaderboard(type: 'global' | 'college') {
       }
 
       // Store all entries for dynamic filter options (before applying filters)
-      setAllEntries(entries.filter(e => e.globalScore > 0));
+      setAllEntries(entries);
 
       // Apply filters
       if (filters.college !== 'all') entries = entries.filter((e) => e.college === filters.college);
       if (filters.course !== 'all') entries = entries.filter((e) => e.course === filters.course);
       if (filters.graduationYear !== 'all') entries = entries.filter((e) => e.graduationYear === filters.graduationYear);
 
-      // Sort
+      // Sort by primary key descending, then by account age ascending (older first)
       const sortKey = filters.sortBy as keyof LeaderboardEntry;
       entries.sort((a, b) => {
         const aVal = Number(a[sortKey]) || 0;
         const bVal = Number(b[sortKey]) || 0;
-        return bVal - aVal;
+        if (bVal !== aVal) {
+          return bVal - aVal;
+        }
+        return a.createdAt - b.createdAt;
       });
       entries = entries.map((e, i) => ({ ...e, rank: i + 1 }));
 
       const myEntry = entries.find((e) => e.userId === user?.id);
       setMyRank(myEntry || null);
 
-      setData(entries.filter((e) => e.globalScore > 0));
+      setData(entries);
     } catch (err) {
       console.error('Leaderboard fetch error:', err);
     } finally {
