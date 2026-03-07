@@ -1,0 +1,2 @@
+[functions.sync-data]
+verify_jwt = false

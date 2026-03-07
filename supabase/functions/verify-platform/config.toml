@@ -1,0 +1,2 @@
+[functions.verify-platform]
+verify_jwt = false

@@ -1,0 +1,2 @@
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS course text DEFAULT NULL;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS graduation_year text DEFAULT NULL;
