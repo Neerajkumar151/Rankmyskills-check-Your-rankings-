@@ -41,15 +41,17 @@ The overarching formula is weighted as follows:
 ```javascript
 const GlobalScore = (
     (LeetCode.Rating * 0.40)      // 40% Weight
-  + (Codeforces.Elo * 0.30)       // 30% Weight
-  + (GeeksforGeeks.Score * 0.30)  // 30% Weight
+  + (Codeforces.Elo * 0.20)       // 20% Weight
+  + (CodeChef.Rating * 0.20)      // 20% Weight
+  + (GeeksforGeeks.Score * 0.20)  // 20% Weight
 );
 ```
 
 ### Weighting Breakdown:
 1. **LeetCode (40%)**: Prioritized heavily as it is the industry standard proxy for technical interviews and data structure fluency.
-2. **Codeforces (30%)**: Reflects advanced mathematical logic, problem-solving speed, and performance under contest pressure.
-3. **GeeksforGeeks (30%)**: Rewards long-term consistency and the total volume of solved problems across a wide array of conceptual topics.
+2. **Codeforces (20%)**: Reflects advanced mathematical logic, problem-solving speed, and performance under contest pressure.
+3. **CodeChef (20%)**: Focuses on long challenges and algorithmic thinking in a highly structured, competitive environment.
+4. **GeeksforGeeks (20%)**: Rewards long-term consistency and the total volume of solved problems across a wide array of conceptual topics.
 
 <br/>
 
