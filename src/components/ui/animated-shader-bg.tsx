@@ -325,7 +325,7 @@ export const AnimatedShaderBG = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 w-full h-full object-cover touch-none block"
+            className="absolute inset-0 w-full h-full object-cover block"
             style={{ background: 'transparent' }}
         />
     );
