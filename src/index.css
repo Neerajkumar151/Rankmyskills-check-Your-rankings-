@@ -819,7 +819,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   position: absolute;
   top: 100%;
   left: -190%;
-  transform: translateX(70%) scale(0.5);
+  transform: translateX(135%) scale(0.5);
   opacity: 0;
   visibility: hidden;
   background: #fff;
@@ -836,7 +836,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   opacity: 1;
   visibility: visible;
   background: #fff;
-  transform: translate(70%, -5px) scale(1);
+  transform: translate(135%, -5px) scale(1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -852,7 +852,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   position: absolute;
   top: 100%;
   left: -145%;
-  transform: translateX(70%) scale(0.5);
+  transform: translateX(100%) scale(0.5);
   opacity: 0;
   visibility: hidden;
   background: #fff;
@@ -869,7 +869,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   opacity: 1;
   visibility: visible;
   background: #fff;
-  transform: translate(70%, -5px) scale(1);
+  transform: translate(100%, -5px) scale(1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -951,7 +951,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   position: absolute;
   top: 100%;
   left: -150%;
-  transform: translateX(70%) scale(0.5);
+  transform: translateX(100%) scale(0.5);
   opacity: 0;
   visibility: hidden;
   background: #fff;
@@ -968,7 +968,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   opacity: 1;
   visibility: visible;
   background: #fff;
-  transform: translate(70%, -5px) scale(1);
+  transform: translate(100%, -5px) scale(1);
   display: flex;
   align-items: center;
   justify-content: center;
