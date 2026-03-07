@@ -171,7 +171,7 @@ Deno.serve(async (req) => {
 
     if (!userId || !platform || !username || !code) {
       return new Response(JSON.stringify({ success: false, message: 'Missing required parameters' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -184,14 +184,14 @@ Deno.serve(async (req) => {
 
     if (!SUPPORTED_PLATFORMS.includes(platform)) {
       return new Response(JSON.stringify({ success: false, message: 'Invalid platform' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
     // Validate username format
     if (!USERNAME_REGEX.test(username)) {
       return new Response(JSON.stringify({ success: false, message: 'Invalid username format' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -204,21 +204,21 @@ Deno.serve(async (req) => {
 
     if (fetchError || !verificationRequest) {
       return new Response(JSON.stringify({ success: false, message: 'Invalid verification code.' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
     if (new Date(verificationRequest.expires_at) < new Date()) {
       await supabaseQuery('DELETE', 'verification_requests', { filters: { 'id': `eq.${verificationRequest.id}` } });
       return new Response(JSON.stringify({ success: false, message: 'Verification code has expired.' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
     if (verificationRequest.attempts >= 3) {
       await supabaseQuery('DELETE', 'verification_requests', { filters: { 'id': `eq.${verificationRequest.id}` } });
       return new Response(JSON.stringify({ success: false, message: 'Maximum attempts reached. Generate a new code.' }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -230,18 +230,30 @@ Deno.serve(async (req) => {
     const profileContent = await fetchProfileContent(platform, username);
     if (!profileContent) {
       return new Response(JSON.stringify({ success: false, message: `Could not fetch ${platform} profile. Check your username.` }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
     const codeFound = profileContent.includes(code);
     if (!codeFound) {
       const remainingAttempts = 3 - (verificationRequest.attempts + 1);
+
+      // Check if there is an OLD code in the profile
+      const hasOldCode = /RMS-[A-Z0-9]{6}/.test(profileContent);
+      if (hasOldCode) {
+        return new Response(JSON.stringify({
+          success: false,
+          message: `The code in your profile is old, please add this new code. ${remainingAttempts > 0 ? `${remainingAttempts} attempts remaining.` : ''}`,
+        }), {
+          status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
       return new Response(JSON.stringify({
         success: false,
         message: `Code not found on profile. ${remainingAttempts > 0 ? `${remainingAttempts} attempts remaining.` : ''}`,
       }), {
-        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
