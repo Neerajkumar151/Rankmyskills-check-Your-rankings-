@@ -103,7 +103,7 @@ export const DashboardHome = memo(() => {
         </Card>
       </motion.div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-[5fr_7fr] gap-6">
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 }}>
           <h3 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
             <Award className="w-5 h-5 text-blue-500" /> Connected Platforms
@@ -123,7 +123,7 @@ export const DashboardHome = memo(() => {
                       transition={{ delay: 0.3 + index * 0.08 }}
                     >
                       <Card className="bg-card border-border hover:border-blue-500/30 transition-colors">
-                        <CardContent className="p-4 flex items-center justify-between">
+                        <CardContent className="p-3 flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${colors} flex items-center justify-center shadow-sm overflow-hidden`}>
                               {platformLogos[account.platform] ?? <CheckCircle2 className="w-4 h-4 text-white" />}
@@ -170,16 +170,20 @@ export const DashboardHome = memo(() => {
                   return (
                     <motion.div
                       key={classification.name}
-                      className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all ${isCurrent ? 'bg-blue-500/10 border border-blue-500/20 shadow-sm' : 'hover:bg-accent/50'}`}
+                      className={`flex items-center justify-between px-3 py-2 rounded-lg transition-all ${isCurrent ? 'bg-blue-500/10 border border-blue-500/20 shadow-sm' : 'hover:bg-accent/50'}`}
                       animate={isCurrent ? { scale: [1, 1.01, 1] } : {}}
                       transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse' }}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <div className={`w-2.5 h-2.5 rounded-full ${classification.color}`} />
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={classification.badge}
+                          alt={classification.name}
+                          className="w-16 h-16 rounded-md object-cover shrink-0 shadow-sm"
+                        />
                         <span className={`text-sm font-medium ${isCurrent ? 'text-foreground' : 'text-muted-foreground'}`}>{classification.name}</span>
                         {isCurrent && <span className="text-[10px] bg-blue-500/20 text-blue-600 dark:text-blue-400 px-1.5 py-0.5 rounded font-medium">YOU</span>}
                       </div>
-                      <span className="text-muted-foreground text-xs font-mono">{classification.range}</span>
+                      <span className="text-muted-foreground text-sm font-mono">{classification.range}</span>
                     </motion.div>
                   );
                 })}

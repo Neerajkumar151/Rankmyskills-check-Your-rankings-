@@ -12,6 +12,7 @@ import { VerificationModal } from '@/components/VerificationModal';
 import { getLevel } from '@/lib/constants';
 import { LevelBadge } from '@/components/common/LevelBadge';
 import { useUserPlatformStats } from '@/hooks/useUserPlatformStats';
+import { levelClassification } from '@/lib/constants';
 
 export const EditProfile = memo(() => {
   const { profile, platformAccounts, upsertPlatformAccount, refreshPlatformAccounts, user } = useAuth();
@@ -77,8 +78,23 @@ export const EditProfile = memo(() => {
       </div>
 
       <Card className="bg-card border-border">
-        <CardHeader>
+        <CardHeader className="flex flex-row flex-wrap items-center justify-between space-y-0">
           <CardTitle className="text-foreground text-lg">Personal Information</CardTitle>
+          {level && (
+            <div className="flex items-center gap-4 bg-transparent mt-4 sm:mt-0">
+              <img
+                src={levelClassification.find((c) => c.name === level)?.badge}
+                alt={level}
+                className="w-20 h-20 rounded-xl object-contain drop-shadow-lg"
+              />
+              <div className="flex flex-col">
+                <span className="text-sm text-muted-foreground uppercase font-semibold tracking-widest mb-0.5">Rank</span>
+                <span className={`text-xl font-bold ${levelClassification.find((c) => c.name === level)?.textColor}`}>
+                  {level}
+                </span>
+              </div>
+            </div>
+          )}
         </CardHeader>
         <CardContent>
           <ProfileForm />

@@ -3,14 +3,14 @@ export type Page = 'landing' | 'login' | 'register' | 'forgot-password' | 'dashb
 export type DashboardPage = 'home' | 'portfolio' | 'global-leaderboard' | 'college-leaderboard' | 'edit-profile';
 
 export const levelClassification = [
-    { name: 'Beginner', range: '0 - 3,000', color: 'bg-gray-400', textColor: 'text-gray-500' },
-    { name: 'Learner', range: '3,000 - 12,000', color: 'bg-blue-500', textColor: 'text-blue-500' },
-    { name: 'Intermediate', range: '12,000 - 20,000', color: 'bg-orange-500', textColor: 'text-orange-500' },
-    { name: 'Strong', range: '20,000 - 30,000', color: 'bg-green-500', textColor: 'text-green-500' },
-    { name: 'Advanced', range: '30,000 - 60,000', color: 'bg-purple-500', textColor: 'text-purple-500' },
-    { name: 'Expert', range: '60,000 - 90,000', color: 'bg-pink-500', textColor: 'text-pink-500' },
-    { name: 'Elite', range: '90,000 - 1,20,000', color: 'bg-yellow-500', textColor: 'text-yellow-500' },
-    { name: 'God', range: '1,20,000+', color: 'bg-red-600', textColor: 'text-red-600' },
+    { name: 'Beginner', range: '0 - 3,000', color: 'bg-gray-400', textColor: 'text-gray-500', badge: '/beginner.png' },
+    { name: 'Learner', range: '3,000 - 12,000', color: 'bg-blue-500', textColor: 'text-blue-500', badge: '/learner.png' },
+    { name: 'Intermediate', range: '12,000 - 20,000', color: 'bg-orange-500', textColor: 'text-orange-500', badge: '/intermediate.png' },
+    { name: 'Strong', range: '20,000 - 30,000', color: 'bg-green-500', textColor: 'text-green-500', badge: '/strong.png' },
+    { name: 'Advanced', range: '30,000 - 60,000', color: 'bg-purple-500', textColor: 'text-purple-500', badge: '/advanced.png' },
+    { name: 'Expert', range: '60,000 - 90,000', color: 'bg-pink-500', textColor: 'text-pink-500', badge: '/expert.png' },
+    { name: 'Elite', range: '90,000 - 1,20,000', color: 'bg-yellow-500', textColor: 'text-yellow-500', badge: '/elite.png' },
+    { name: 'God', range: '1,20,000+', color: 'bg-red-600', textColor: 'text-red-600', badge: '/god.png' },
 ];
 
 export const colleges = [
