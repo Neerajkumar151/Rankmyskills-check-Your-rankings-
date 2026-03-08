@@ -13,6 +13,7 @@ export const PlatformsSection = () => {
             color: 'from-amber-400 to-orange-500',
             bg: 'bg-amber-500/[0.06] dark:bg-amber-500/[0.10]',
             border: 'border-amber-500/10',
+            url: 'https://leetcode.com',
         },
         {
             name: 'Codeforces',
@@ -22,6 +23,7 @@ export const PlatformsSection = () => {
             color: 'from-blue-400 to-cyan-500',
             bg: 'bg-blue-500/[0.06] dark:bg-blue-500/[0.10]',
             border: 'border-blue-500/10',
+            url: 'https://codeforces.com',
         },
         {
             name: 'CodeChef',
@@ -32,6 +34,7 @@ export const PlatformsSection = () => {
             color: 'from-orange-400 to-red-500',
             bg: 'bg-orange-500/[0.06] dark:bg-orange-500/[0.10]',
             border: 'border-orange-500/10',
+            url: 'https://www.codechef.com',
         },
         {
             name: 'GeeksforGeeks',
@@ -42,6 +45,7 @@ export const PlatformsSection = () => {
             color: 'from-green-400 to-emerald-500',
             bg: 'bg-green-500/[0.06] dark:bg-green-500/[0.10]',
             border: 'border-green-500/10',
+            url: 'https://practice.geeksforgeeks.org',
         },
     ];
 
@@ -64,12 +68,19 @@ export const PlatformsSection = () => {
                     viewport={{ once: true }}
                 >
                     {platforms.map((platform, i) => (
-                        <motion.div
+                        <motion.a
+                            href={platform.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             key={i}
                             variants={fadeInUp}
-                            className={`relative ${platform.bg} rounded-2xl p-7 border ${platform.border} hover:shadow-lg transition-all duration-300 group`}
+                            className={`relative ${platform.bg} rounded-2xl p-7 border ${platform.border} hover:shadow-lg hover:border-${platform.color.split(' ')[0].replace('from-', '')}/30 cursor-pointer transition-all duration-300 group block`}
                             whileHover={{ y: -4, transition: { duration: 0.25 } }}
                         >
+                            <div className="absolute top-4 right-4 text-muted-foreground/40 group-hover:text-foreground/60 transition-colors opacity-0 group-hover:opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </div>
+
                             {/* Platform exact colored logo */}
                             <div className="mb-6 flex items-center group-hover:scale-110 transition-transform duration-300">
                                 <platform.icon />
@@ -79,10 +90,10 @@ export const PlatformsSection = () => {
                             <p className="text-muted-foreground text-[13px] leading-relaxed mb-4">{platform.description}</p>
 
                             {/* Stat badge */}
-                            <span className="inline-block px-3 py-1 rounded-full bg-background/80 dark:bg-background/50 text-[11px] font-semibold text-foreground border border-border/40">
+                            <span className="inline-block px-3 py-1 rounded-full bg-background/80 dark:bg-background/50 text-[11px] font-semibold text-foreground border border-border/40 group-hover:border-foreground/20 transition-colors">
                                 {platform.stats}
                             </span>
-                        </motion.div>
+                        </motion.a>
                     ))}
                 </motion.div>
             </div>

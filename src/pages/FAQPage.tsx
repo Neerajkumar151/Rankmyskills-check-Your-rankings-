@@ -1,8 +1,8 @@
-import { ArrowLeft, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import type { Page } from '@/lib/constants';
-import { Footer } from '@/components/landing/Footer';
+import { InfoPageLayout } from '@/components/layout/InfoPageLayout';
 
 export const FAQPage = ({ onNavigate }: { onNavigate: (page: Page) => void }) => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -31,33 +31,8 @@ export const FAQPage = ({ onNavigate }: { onNavigate: (page: Page) => void }) =>
     ];
 
     return (
-        <div className="min-h-screen bg-background relative flex flex-col selection:bg-indigo-500/30">
-            {/* Ambient Background Gradient */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.04),transparent_50%)] dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.02),transparent_50%)] pointer-events-none" />
-
-            <header className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-white/5 dark:border-white/5 transition-all">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <button
-                        onClick={() => onNavigate('landing')}
-                        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 group text-sm font-medium"
-                    >
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        <span>Back</span>
-                    </button>
-                    <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('landing')}>
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-md overflow-hidden">
-                            <img
-                                src="/logo.jpeg"
-                                alt="RankMySkills"
-                                className="w-full h-full object-cover mix-blend-screen"
-                            />
-                        </div>
-                        <span className="text-foreground font-semibold tracking-tight text-sm">RankMySkills</span>
-                    </div>
-                </div>
-            </header>
-
-            <main className="flex-1 max-w-4xl mx-auto px-6 pt-32 pb-24 relative z-10 w-full">
+        <InfoPageLayout onNavigate={onNavigate}>
+            <main className="flex-1 max-w-4xl mx-auto px-6 pt-16 pb-24 relative z-10 w-full">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -115,10 +90,6 @@ export const FAQPage = ({ onNavigate }: { onNavigate: (page: Page) => void }) =>
                     })}
                 </motion.div>
             </main>
-
-            <div className="relative z-20">
-                <Footer onNavigate={onNavigate} />
-            </div>
-        </div>
+        </InfoPageLayout>
     );
 };

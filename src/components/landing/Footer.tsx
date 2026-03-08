@@ -16,17 +16,17 @@ export const Footer = ({ onNavigate }: { onNavigate: (page: Page) => void }) => 
     ];
 
     const resources = [
-        { title: 'How It Works', action: () => { const el = document.getElementById('how-it-works'); el?.scrollIntoView({ behavior: 'smooth' }); } },
+        { title: 'How It Works', action: () => onNavigate('how-it-works') },
         { title: 'Score Formula', action: () => onNavigate('score-formula') },
         { title: 'Level System', action: () => onNavigate('level-system') },
         { title: 'FAQ', action: () => onNavigate('faq') },
     ];
 
     const supported = [
-        { title: 'LeetCode' },
-        { title: 'Codeforces' },
-        { title: 'CodeChef' },
-        { title: 'GeeksforGeeks' },
+        { title: 'LeetCode', link: 'https://leetcode.com' },
+        { title: 'Codeforces', link: 'https://codeforces.com' },
+        { title: 'CodeChef', link: 'https://www.codechef.com' },
+        { title: 'GeeksforGeeks', link: 'https://www.geeksforgeeks.org' },
     ];
 
 
@@ -101,11 +101,16 @@ export const Footer = ({ onNavigate }: { onNavigate: (page: Page) => void }) => 
                     <div className="col-span-3 min-[400px]:col-span-2 md:col-span-1 w-full">
                         <span className="text-muted-foreground mb-3 inline-block font-mono text-xs uppercase tracking-wider">Supported</span>
                         <div className="flex flex-col gap-2">
-                            {supported.map(({ title }, i) => (
-                                <div key={i} className="flex items-center gap-2 py-1 text-sm text-muted-foreground">
+                            {supported.map(({ title, link }, i) => (
+                                <a
+                                    key={i}
+                                    href={link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center gap-2 py-1 text-sm text-muted-foreground hover:text-foreground hover:underline">
                                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                                     {title}
-                                </div>
+                                </a>
                             ))}
                         </div>
                     </div>

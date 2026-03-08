@@ -1,8 +1,7 @@
-import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { Page } from '@/lib/constants';
 import { levelClassification, staggerContainer, fadeInUp } from '@/lib/constants';
-import { Footer } from '@/components/landing/Footer';
+import { InfoPageLayout } from '@/components/layout/InfoPageLayout';
 
 export const LevelSystemPage = ({ onNavigate }: { onNavigate: (page: Page) => void }) => {
 
@@ -19,33 +18,8 @@ export const LevelSystemPage = ({ onNavigate }: { onNavigate: (page: Page) => vo
     ];
 
     return (
-        <div className="min-h-screen bg-background relative overflow-hidden flex flex-col selection:bg-indigo-500/30">
-            {/* Ambient Background Gradient */}
-            <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(232,121,249,0.04),transparent_50%)] dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.02),transparent_50%)] pointer-events-none" />
-
-            <header className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-white/5 dark:border-white/5 transition-all">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <button
-                        onClick={() => onNavigate('landing')}
-                        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 group text-sm font-medium"
-                    >
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        <span>Back</span>
-                    </button>
-                    <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('landing')}>
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-md overflow-hidden">
-                            <img
-                                src="/logo.jpeg"
-                                alt="RankMySkills"
-                                className="w-full h-full object-cover mix-blend-screen"
-                            />
-                        </div>
-                        <span className="text-foreground font-semibold tracking-tight text-sm">RankMySkills</span>
-                    </div>
-                </div>
-            </header>
-
-            <main className="flex-1 max-w-5xl mx-auto px-6 pt-32 pb-20 relative z-10 w-full">
+        <InfoPageLayout onNavigate={onNavigate}>
+            <main className="flex-1 max-w-5xl mx-auto px-6 pt-16 pb-20 relative z-10 w-full">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -83,8 +57,11 @@ export const LevelSystemPage = ({ onNavigate }: { onNavigate: (page: Page) => vo
                                 {/* Left Side: Rank Badge */}
                                 <div className="flex flex-col items-center justify-center shrink-0 w-32 h-32 rounded-3xl bg-background/50 border border-white/5 shadow-inner relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
                                     <div className={`absolute inset-0 opacity-20 ${level.color}`} />
-                                    <span className={`text-5xl font-black tracking-tighter ${level.textColor}`}>{i + 1}</span>
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-2">Level</span>
+                                    <img
+                                        src={level.badge}
+                                        alt={`${level.name} badge`}
+                                        className="w-22 h-22 object-contain drop-shadow-2xl relative z-10"
+                                    />
                                 </div>
 
                                 {/* Right Side: Content */}
@@ -104,10 +81,6 @@ export const LevelSystemPage = ({ onNavigate }: { onNavigate: (page: Page) => vo
                     ))}
                 </motion.div>
             </main>
-
-            <div className="relative z-20">
-                <Footer onNavigate={onNavigate} />
-            </div>
-        </div>
+        </InfoPageLayout>
     );
 };

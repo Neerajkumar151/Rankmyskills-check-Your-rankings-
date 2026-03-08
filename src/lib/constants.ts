@@ -1,5 +1,5 @@
 // Types
-export type Page = 'landing' | 'login' | 'register' | 'forgot-password' | 'dashboard' | 'portfolio' | 'global-leaderboard' | 'college-leaderboard' | 'edit-profile' | 'score-formula' | 'level-system' | 'faq';
+export type Page = 'landing' | 'login' | 'register' | 'forgot-password' | 'dashboard' | 'portfolio' | 'global-leaderboard' | 'college-leaderboard' | 'edit-profile' | 'score-formula' | 'level-system' | 'faq' | 'how-it-works';
 export type DashboardPage = 'home' | 'portfolio' | 'global-leaderboard' | 'college-leaderboard' | 'edit-profile';
 
 export const levelClassification = [

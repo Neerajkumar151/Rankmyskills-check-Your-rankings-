@@ -1,37 +1,11 @@
-import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { Page } from '@/lib/constants';
-import { Footer } from '@/components/landing/Footer';
+import { InfoPageLayout } from '@/components/layout/InfoPageLayout';
 
 export const ScoreFormulaPage = ({ onNavigate }: { onNavigate: (page: Page) => void }) => {
     return (
-        <div className="min-h-screen bg-background relative flex flex-col selection:bg-indigo-500/30">
-            {/* Ambient Background Gradient */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.06),transparent_50%)] dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.03),transparent_50%)] pointer-events-none" />
-
-            <header className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-white/5 dark:border-white/5 transition-all">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <button
-                        onClick={() => onNavigate('landing')}
-                        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 group text-sm font-medium"
-                    >
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        <span>Back</span>
-                    </button>
-                    <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('landing')}>
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center shadow-md overflow-hidden">
-                            <img
-                                src="/logo.jpeg"
-                                alt="RankMySkills"
-                                className="w-full h-full object-cover mix-blend-screen"
-                            />
-                        </div>
-                        <span className="text-foreground font-semibold tracking-tight text-sm">RankMySkills</span>
-                    </div>
-                </div>
-            </header>
-
-            <main className="flex-1 max-w-4xl mx-auto px-6 pt-32 pb-24 relative z-10 w-full">
+        <InfoPageLayout onNavigate={onNavigate}>
+            <main className="flex-1 max-w-4xl mx-auto px-6 pt-16 pb-24 relative z-10 w-full">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -61,38 +35,67 @@ export const ScoreFormulaPage = ({ onNavigate }: { onNavigate: (page: Page) => v
                     <div className="prose prose-invert max-w-none">
                         <h3 className="text-2xl font-bold tracking-tight text-foreground mb-4">Core Principles</h3>
                         <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                            RankMySkills was built on the philosophy that true engineering prowess spans multiple disciplines. An algorithm expert on Codeforces should be evaluated on the same playing field as a dynamic programming master on LeetCode. Our algorithm normalizes platform variances to produce an equitable metric.
+                            RankMySkills evaluates engineering prowess across multiple dimensions. To normalize extreme rating variances between platforms and prevent single-platform bias, we utilize a non-linear scaling algorithm (square root normalization). This creates a balanced, equitable Global Score that rewards both peak algorithmic performance on competitive sites and long-term consistency across practice platforms. All values are scaled by a factor of 1000 for granularity.
                         </p>
 
-                        <div className="bg-background/80 rounded-2xl p-6 sm:p-8 border border-white/5 font-mono text-sm shadow-inner mb-8 overflow-x-auto">
-                            <span className="text-indigo-400 font-bold">const</span> <span className="text-foreground">GlobalScore</span> = ( <br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;(<span className="text-emerald-400">LeetCode.Rating</span> <span className="text-foreground">*</span> <span className="text-orange-400">0.40</span>) <br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-foreground">+</span> (<span className="text-purple-400">Codeforces.Elo</span> <span className="text-foreground">*</span> <span className="text-orange-400">0.30</span>) <br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-foreground">+</span> ((<span className="text-sky-400">GFG.Solved</span> <span className="text-foreground">/</span> <span className="text-sky-400">GFG.Total</span>) <span className="text-foreground">*</span> <span className="text-orange-400">0.30</span>) <br />
-                            );
+                        <div className="bg-background/80 rounded-2xl p-6 sm:p-8 border border-white/5 font-mono text-sm sm:text-base md:text-lg shadow-inner mb-10 overflow-x-auto leading-relaxed">
+                            <span className="text-indigo-400 font-bold">const</span> <span className="text-foreground">GlobalScore</span> <span className="text-foreground">=</span> Math.<span className="text-blue-400">round</span>( (<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;(<span className="text-orange-400">0.35</span> <span className="text-foreground">*</span> Math.<span className="text-blue-400">sqrt</span>(<span className="text-red-400">Codeforces.Rating</span>)) <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-foreground">+</span> (<span className="text-orange-400">0.30</span> <span className="text-foreground">*</span> Math.<span className="text-blue-400">sqrt</span>(<span className="text-yellow-500">LeetCode.Rating</span>)) <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-foreground">+</span> (<span className="text-orange-400">0.15</span> <span className="text-foreground">*</span> Math.<span className="text-blue-400">sqrt</span>(<span className="text-stone-400">CodeChef.Rating</span>)) <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-foreground">+</span> (<span className="text-orange-400">0.10</span> <span className="text-foreground">*</span> Math.<span className="text-blue-400">sqrt</span>(<span className="text-emerald-400">GFG.CodingScore</span>)) <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-foreground">+</span> (<span className="text-orange-400">0.10</span> <span className="text-foreground">*</span> Math.<span className="text-blue-400">sqrt</span>(<span className="text-purple-400">TotalProblemsSolved</span>)) <br />
+                            ) <span className="text-foreground">*</span> <span className="text-orange-400">1000</span> );
                         </div>
 
-                        <ul className="space-y-4 text-muted-foreground text-lg mb-8">
-                            <li className="flex items-start gap-3">
-                                <div className="w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 mt-0.5 border border-indigo-500/20 text-sm font-bold">1</div>
-                                <span><strong className="text-foreground">LeetCode Weight (40%):</strong> Prioritized heavily as it is the industry standard proxy for technical interviews and data structure fluency.</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <div className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 border border-purple-500/20 text-sm font-bold">2</div>
-                                <span><strong className="text-foreground">Codeforces Weight (30%):</strong> Reflects advanced mathematical logic and speed under contest pressures.</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <div className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 border border-emerald-500/20 text-sm font-bold">3</div>
-                                <span><strong className="text-foreground">GeeksforGeeks Weight (30%):</strong> Rewards long-term consistency and total volume of solved problems across a wide array of conceptual topics.</span>
-                            </li>
-                        </ul>
+                        <div className="space-y-6">
+                            <h3 className="text-2xl font-bold tracking-tight text-foreground mb-4">Weight Breakdown</h3>
+
+                            <div className="grid gap-4 md:grid-cols-2">
+                                <div className="bg-background/50 border border-white/5 p-5 rounded-xl">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-8 h-8 rounded-lg bg-red-500/20 text-red-500 flex items-center justify-center font-bold border border-red-500/20">35%</div>
+                                        <h4 className="font-bold text-foreground">Codeforces</h4>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">Carries the highest weight due to its rigorous mathematical standards, strict time constraints, and globally recognized Elo system reflecting immense algorithmic problem-solving speed.</p>
+                                </div>
+
+                                <div className="bg-background/50 border border-white/5 p-5 rounded-xl">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-8 h-8 rounded-lg bg-yellow-500/20 text-yellow-500 flex items-center justify-center font-bold border border-yellow-500/20">30%</div>
+                                        <h4 className="font-bold text-foreground">LeetCode</h4>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">The industry standard proxy for technical interviews and data structure fluency. High weight rewards consistency in solving standard interview-oriented algorithmic challenges.</p>
+                                </div>
+
+                                <div className="bg-background/50 border border-white/5 p-5 rounded-xl">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-8 h-8 rounded-lg bg-stone-500/20 text-stone-400 flex items-center justify-center font-bold border border-white/10">15%</div>
+                                        <h4 className="font-bold text-foreground">CodeChef</h4>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">Crucial for developing endurance and deep logical formulation. Evaluates performance in long challenges, lunchtime variations, and consistent competitive participation.</p>
+                                </div>
+
+                                <div className="bg-background/50 border border-white/5 p-5 rounded-xl">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-500 flex items-center justify-center font-bold border border-emerald-500/20">10%</div>
+                                        <h4 className="font-bold text-foreground">GeeksforGeeks</h4>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">Rewards mastery of foundational computer science concepts, vast array of practice problems, and long-term consistency in building coding fundamentals step-by-step.</p>
+                                </div>
+
+                                <div className="bg-background/50 border border-white/5 p-5 rounded-xl md:col-span-2">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold border border-purple-500/20">10%</div>
+                                        <h4 className="font-bold text-foreground">Total Problems Solved</h4>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">A global accumulator metric. By combining the total volume of solved problems across all connected platforms, we reward sheer dedication, daily practice, and the grind required to truly master software engineering.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </motion.div>
             </main>
-
-            <div className="relative z-20">
-                <Footer onNavigate={onNavigate} />
-            </div>
-        </div>
+        </InfoPageLayout>
     );
 };

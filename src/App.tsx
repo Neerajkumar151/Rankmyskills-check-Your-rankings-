@@ -17,6 +17,7 @@ import { EditProfile } from '@/pages/EditProfile';
 import { ScoreFormulaPage } from '@/pages/ScoreFormulaPage';
 import { LevelSystemPage } from '@/pages/LevelSystemPage';
 import { FAQPage } from '@/pages/FAQPage';
+import { HowItWorksPage } from '@/pages/HowItWorksPage';
 import type { Page } from '@/lib/constants';
 
 function AppContent() {
@@ -28,6 +29,10 @@ function AppContent() {
       setCurrentPage('landing');
     }
   }, [isAuthenticated, currentPage]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   if (isLoading) {
     return (
@@ -94,6 +99,8 @@ function AppContent() {
         return <LevelSystemPage onNavigate={setCurrentPage} />;
       case 'faq':
         return <FAQPage onNavigate={setCurrentPage} />;
+      case 'how-it-works':
+        return <HowItWorksPage onNavigate={setCurrentPage} />;
       default:
         return <LandingPage onNavigate={setCurrentPage} />;
     }

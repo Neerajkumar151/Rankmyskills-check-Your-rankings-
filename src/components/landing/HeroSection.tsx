@@ -105,10 +105,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (page: Page) => void }
                             </LiquidButton>
                             <button
                                 className="btn-shiny-glass"
-                                onClick={() => {
-                                    const el = document.getElementById('how-it-works');
-                                    el?.scrollIntoView({ behavior: 'smooth' });
-                                }}
+                                onClick={() => onNavigate('how-it-works')}
                             >
                                 <div className="btn-wrap">
                                     <p>

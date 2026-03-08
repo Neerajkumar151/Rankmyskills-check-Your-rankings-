@@ -97,11 +97,11 @@ export const HowItWorks = () => {
                                 <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
                                     Your Global Engineer Score is a weighted composite of your ratings across all connected platforms. It uses a square-root normalization to fairly compare different rating scales.
                                 </p>
-                                <code className="block bg-background dark:bg-background/50 rounded-xl px-5 py-4 text-sm font-mono text-foreground border border-border/60 mb-4">
-                                    (0.35×√CF + 0.30×√LC + 0.25×√CC + 0.10×√TotalSolved) × 1000
+                                <code className="block bg-background dark:bg-background/50 rounded-xl px-4 py-4 text-xs sm:text-sm font-mono text-foreground border border-border/60 mb-4 break-words whitespace-pre-wrap">
+                                    (0.35×√CF + 0.30×√LC + 0.15×√CC + 0.10×√GFG + 0.10×√Solved) × 1000
                                 </code>
-                                <p className="text-muted-foreground text-xs tracking-wide">
-                                    <span className="font-medium">CF</span> = Codeforces · <span className="font-medium">LC</span> = LeetCode · <span className="font-medium">CC</span> = CodeChef
+                                <p className="text-muted-foreground text-[10px] sm:text-xs tracking-wide">
+                                    <span className="font-medium">CF</span> = Codeforces · <span className="font-medium">LC</span> = LeetCode · <span className="font-medium">CC</span> = CodeChef · <span className="font-medium">GFG</span> = GeeksforGeeks
                                 </p>
                             </div>
 
